@@ -1,5 +1,6 @@
 package ru.skypro.SpringMockitoTestimg.controller;
 
+import jakarta.websocket.server.PathParam;
 import org.springframework.web.bind.annotation.*;
 import ru.skypro.SpringMockitoTestimg.model.Employee;
 import ru.skypro.SpringMockitoTestimg.service.DepartmentService;
@@ -16,23 +17,28 @@ public class DepartmentController {
         this.departmentService = departmentService;
     }
 
-    @GetMapping("{id}/salary/sum")
-    public Employee getEmployeeWithMaxSalary (@PathVariable("id") Integer id){
-        return departmentService.getEmployeeWithMaxSalary(id);
+    @GetMapping("/{id}/salary/sum")
+    public Integer getSalarySum (@PathVariable("id") Integer id){
+        return departmentService.getSalarySum(id);
     }
 
     @GetMapping("{id}/salary/min")
-    public Employee getEmployeeWithMinSalary (@RequestParam("id") Integer id){
-        return departmentService.getEmployeeWithMinSalary(id);
+    public Integer getEmployeeWithMinSalary (@PathVariable("id") Integer id){
+        return departmentService.getEmployeeWithMinSalary(id).getSalary();
     }
 
-    @GetMapping(value = "all", params = "departmentId")
-    public List<Employee> getEmployeeAllByDepartment (@RequestParam("departmentId") Integer departmentId){
-        return departmentService.getEmployeeAllByDepartment(departmentId);
+    @GetMapping("{id}/salary/max")
+    public Integer getEmployeeWithSMaxSalary (@PathVariable("id") Integer id){
+        return departmentService.getEmployeeWithMaxSalary(id).getSalary();
     }
 
-    @GetMapping("all")
-    public Map<Integer, List<Employee>> getAllEmployees (){
-        return departmentService.getAllEmployees();
+    @GetMapping("{id}/employees")
+    public List<Employee> getEmployees (@PathVariable("id") Integer id){
+        return departmentService.getEmployees(id);
+    }
+
+    @GetMapping("employees")
+    public Map<Integer, List<Employee>> getGroupedByDepartmentEmployees (){
+        return departmentService.getGroupedByDepartmentEmployees();
     }
 }
