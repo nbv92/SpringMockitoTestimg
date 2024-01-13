@@ -55,12 +55,14 @@ public class DepartmentServiceImplTest {
     public void shouldReturnNullWhenThereAreNoEmployeesInDepartment() {
         //given
         int departmentId = 1;
-        String numberNull = "Потом допишу";
-        when(employeeService.getAll()).thenReturn(Collections.emptyMap());
+        Map<String, Employee> employees = new HashMap<>();
+        int salary = 100;
+        employees.put("key", new Employee("first_name", "last_name", salary, departmentId));
+        when(employeeService.getAll()).thenReturn(employees);
         //when
         Employee employee = departmentService.getEmployeeWithMinSalary(departmentId);
         //then
-        Assertions.assertEquals(numberNull, employee);
+        Assertions.assertEquals(salary, employee.getSalary());
     }
         @Test
         public void shouldCorrectlyCalculateSum () {

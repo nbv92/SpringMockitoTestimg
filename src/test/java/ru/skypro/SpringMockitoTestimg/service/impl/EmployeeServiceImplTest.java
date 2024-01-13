@@ -42,11 +42,7 @@ public class EmployeeServiceImplTest {
     public void shouldThrowEmployeeAlreadyRemoveException() {
         //given
         Employee employee = new Employee("Ivan","Ivanov", 50000,1);
-        employeeService.remove(employee.getFirstName(),employee.getLastName()
-        );
-
         //when
-
         //then
         Assertions.assertThrows(EmployeeNotFoundException.class, () -> {
             employeeService.remove(employee.getFirstName(),employee.getLastName()

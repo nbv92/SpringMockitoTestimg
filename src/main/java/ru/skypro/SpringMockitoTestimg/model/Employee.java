@@ -32,12 +32,7 @@ public class Employee {
         }
 
         @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-            Employee employee = (Employee) o;
-            return salary == employee.salary && department == employee.department && Objects.equals(firstName, employee.firstName) && Objects.equals(lastName, employee.lastName);
-        }
+        public boolean equals(Object o) { if (this == o) return true; if (o == null || getClass() != o.getClass()) return false; Employee employee = (Employee) o; return Objects.equals(salary, employee.salary) && Objects.equals(department, employee.department) && Objects.equals(firstName, employee.firstName) && Objects.equals(lastName, employee.lastName); }
 
         @Override
         public int hashCode() {
